@@ -35,12 +35,9 @@
 
 				var $this = $(this);
 
-				// External link? Bail.
-					if ($this.attr('href').charAt(0) != '#') {
-						$nav_a.removeClass('active')
-						$this.addClass('active');
-						return;
-					}
+				// // External link? Bail.
+				// 	if ($this.attr('href').charAt(0) != '#')
+				// 		return;
 
 				// Prevent default.
 					e.preventDefault();
