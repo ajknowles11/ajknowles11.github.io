@@ -54,8 +54,10 @@
 			.each(function() {
 
 				var	$this = $(this),
-					id = $this.attr('href'),
+					id = '#' + $this.attr('id').slice(0, -5),
 					$section = $(id);
+
+					console.log(id)
 
 				// No section for this link? Bail.
 					if ($section.length < 1)
