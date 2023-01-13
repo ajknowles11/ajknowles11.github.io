@@ -35,10 +35,6 @@
 
 				var $this = $(this);
 
-				// // External link? Bail.
-				// 	if ($this.attr('href').charAt(0) != '#')
-				// 		return;
-
 				// Prevent default.
 					e.preventDefault();
 
@@ -56,8 +52,6 @@
 				var	$this = $(this),
 					id = '#' + $this.attr('id').slice(0, -5),
 					$section = $(id);
-
-					console.log(id)
 
 				// No section for this link? Bail.
 					if ($section.length < 1)
@@ -86,18 +80,16 @@
 									$this.addClass('active');
 
 								}
-
-							// Otherwise, if this section's link is the one that's locked, unlock it.
-								else if ($this.hasClass('active-locked'))
-									$this.removeClass('active-locked');
-
 						}
 					});
-
 			});
 
 	// Scrolly.
-		$('.scrolly').scrolly();
+		$('.scrolly').scrolly({
+			finish: function() {
+				$nav_a.filter('.active-locked').removeClass('active-locked')
+			}
+		});
 
 	// Header (narrower + mobile).
 
