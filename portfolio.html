@@ -37,8 +37,8 @@
 							<ul>
                                 <!-- <li><a href="index.html" id="home-link"><span class="icon solid fa-home">Home</span></a></li> -->
 								<li><a href="#games" id="games-link"><span class="icon solid fa-gamepad">Games + Demos</span></a></li>
-                                <li><a href="#school" id="mods-link"><span class="icon solid fa-code-branch">School Projects</span></a></li>
-								<li><a href="#mods" id="other-link"><span class="icon solid fa-keyboard">Mods</span></a></li>
+                                <li><a href="#school" id="school-link"><span class="icon solid fa-code-branch">School Projects</span></a></li>
+								<li><a href="#mods" id="mods-link"><span class="icon solid fa-keyboard">Mods</span></a></li>
 							</ul>
 						</nav>
 
@@ -229,59 +229,135 @@
 
 				</section>
 
-				<!-- Mods -->
-				<section id="school" class="two">
-					<div class="container">
-
+				<!-- School -->
+				<section id="school" class="main">
+					<section id="school-header" class="one dark cover" style="background-image: url(images/schoolwork.png);">
 						<header>
-							<h2>School Projects</h2>
+							<h2 class="alt">School Projects</h2>
 						</header>
+					</section>
 
-						<p>I've been creating games for about a year now, but I've been programming for nearly 8. 
-							My introduction to programming was through making mods for games I liked to play, 
-							and I've obtained a more formal education while at CMU. <br />
-							These are some of the projects I've worked on.
-						</p>
+					<section id="school-malloc" class="three">
+						<div class="container">
+							<header>
+								<h2><a href="https://www.cs.cmu.edu/~213/">MallocLab</a></h2>
+							</header>
 
-						<div class="row aln-center">
+							<header>
+								<h4>C Dynamic Memory Allocator</h4>
+							</header>
+
 							<div class="col-4 col-12-mobile">
-								<article class="item">
-									<a href="#" class="image fit"><img src="images/pic02.jpg" alt="" /></a>
-									<header>
-										<h3>[GCS] Panarctica</h3>
-									</header>
-								</article>
-								<article class="item">
-									<a href="#" class="image fit"><img src="images/pic03.jpg" alt="" /></a>
-									<header>
-										<h3>[GCS] Minion</h3>
-									</header>
-								</article>
+								<p>
+									The infamous assignment from <a href="https://www.cs.cmu.edu/~213/">CMU's 15-213 Intro to Computer Systems</a>, MallocLab is a dynamic heap memory allocator designed to maximize throughput and minimize utilization,
+									with efficient tracking of free blocks of variable size. It is a custom implementation of the C Malloc, Calloc, Realloc, and Free functions.
+								</p>
 							</div>
-							<div class="col-4 col-12-mobile">
-								<article class="item">
-									<a href="#" class="image fit"><img src="images/pic06.jpg" alt="" /></a>
-									<header>
-										<h3>Super Jerma Ball</h3>
-									</header>
-								</article>
-								<article class="item">
-									<a href="#" class="image fit"><img src="images/pic07.jpg" alt="" /></a>
-									<header>
-										<h3>[15213] MallocLab</h3>
-									</header>
-								</article>
-							</div>
+
+							<header>
+								<h3>Features include:</h3>
+							</header>
+
+							<article>
+								<div class="row aln-center aln-middle">
+									<div class="col-8 col-12-mobile">
+										<p>
+											Segregated list for free blocks: Different linked list for each size class, with sizes increasing in powers of 2 to make searching fast.
+										</p>
+									</div>
+									<div class="col-8 col-12-mobile">
+										<p>
+											Footerless blocks when possible (meaning only headers containing size information), and coalescing of neighboring free blocks.
+										</p>
+									</div>
+								</div>
+							</article>
+							<article>
+								Github repository available upon request. Email <a href="mailto:ajknowles21@gmail.com">ajknowles21@gmail.com.</a>
+							</article>
 						</div>
+					</section>
 
-					<footer>
-						<a href="#" class="button">See All</a>
-					</footer>
+					<section id="school-proxy" class="two">
+						<div class="container">
+							<header>
+								<h2><a href="https://www.cs.cmu.edu/~213/">ProxyLab</a></h2>
+							</header>
 
-					</div>
+							<header>
+								<h4>C HTTP Proxy Server, with Cache</h4>
+							</header>
+
+							<div class="col-4 col-12-mobile">
+								<p>
+									Another assignment from <a href="https://www.cs.cmu.edu/~213/">CMU's 15-213 Intro to Computer Systems</a>, ProxyLab is an HTTP Proxy server 
+									supporting GET requests and passing along custom headers to a host, and caching binary information before passing it back to the client.
+								</p>
+							</div>
+
+							<header>
+								<h3>Features include:</h3>
+							</header>
+
+							<article>
+								<div class="row aln-center aln-middle">
+									<div class="col-8 col-12-mobile">
+										<p>
+											Multithreading to enable simultaneous requests, and simulatenous reads from the LRU cache for web objects.
+										</p>
+									</div>
+								</div>
+							</article>
+							<article>
+								Github repository available upon request. Email <a href="mailto:ajknowles21@gmail.com">ajknowles21@gmail.com.</a>
+							</article>
+						</div>
+					</section>
+
+					<section id="school-shell" class="two">
+						<div class="container">
+							<header>
+								<h2><a href="https://www.cs.cmu.edu/~213/">ShellLab</a></h2>
+							</header>
+
+							<header>
+								<h4>Tiny Unix Shell Written in C</h4>
+							</header>
+
+							<div class="col-4 col-12-mobile">
+								<p>
+									Another assignment from <a href="https://www.cs.cmu.edu/~213/">CMU's 15-213 Intro to Computer Systems</a>, ShellLab (aka TSHLab) is 
+									a small Unix shell implementation supporting both foreground and background jobs, as well as interrupt and stop signals from the user.
+								</p>
+							</div>
+
+							<header>
+								<h3>Features include:</h3>
+							</header>
+
+							<article>
+								<div class="row aln-center aln-middle">
+									<div class="col-8 col-12-mobile">
+										<p>
+											Multiprocessing with signal handling to interrupt foreground processes and resume in the foreground or background, as well as reaping dead child processes.
+										</p>
+									</div>
+									<div class="col-8 col-12-mobile">
+										<p>
+											Specify arg input and output files via '&lt' and '&gt'.
+										</p>
+									</div>
+								</div>
+							</article>
+							<article>
+								Github repository available upon request. Email <a href="mailto:ajknowles21@gmail.com">ajknowles21@gmail.com.</a>
+							</article>
+						</div>
+					</section>
+
 				</section>
 
-				<!-- Other -->
+				<!-- Mods -->
 				<section id="mods" class="three">
 					<div class="container">
 
