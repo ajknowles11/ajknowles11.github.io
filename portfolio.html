@@ -36,6 +36,7 @@
 						<nav id="nav">
 							<ul>
                                 <!-- <li><a href="index.html" id="home-link"><span class="icon solid fa-home">Home</span></a></li> -->
+								<li><a href="#xr" id="xr-link"><span class="icon solid fa-vr-cardboard">XR Projects<span></a></li>
 								<li><a href="#games" id="games-link"><span class="icon solid fa-gamepad">Games + Demos</span></a></li>
                                 <li><a href="#school" id="school-link"><span class="icon solid fa-code-branch">School Projects</span></a></li>
 								<li><a href="#mods" id="mods-link"><span class="icon solid fa-keyboard">Mods</span></a></li>
@@ -60,15 +61,80 @@
 		<!-- Main -->
 			<div id="main">
 
-				<!-- Games -->
-				<section id="games" class="main">
-					<section id="games-header" class="one dark cover" style="background-image: url(images/panarctica/banner.jpg);" title="The Panarctica Team">
+				<!-- XR -->
+				<section id="xr" class="main">
+					<section id="xr-header" class="one dark cover" style="background-image: url(images/welding/banner.jpg);" title="The Panarctica Team">
 						<header>
-							<h2 class="alt">Games and Demos</h2>
+							<h2 class="alt">XR Projects</h2>
 						</header>
 					</section>
 
-					<section id="games-cybersleuth" class="two">
+					<section id="xr-welding" class="three">
+						<div class="container">
+							<header>
+								<h2><a href="https://embodiedcomputations.org/project/mixed-reality-in-situ-welding">Mixed Reality Welding</a></h2>
+							</header>
+
+							<header>
+								<h4>Role: App Designer, Programmer</h4>
+							</header>
+
+							<div class="col-4 col-12-mobile">
+								<p>
+									I'm currently working with the <a href="https://embodiedcomputations.org/">Embodied Computations Lab</a> in CMU's School of Design, researching the use of 
+									mixed reality devices in welding. Over the course of the summer we have been developing a prototype welding helmet with custom mounts for a Meta Quest Pro headset and controller, along 
+									with a Unity app to display visuals for the position of the welding gun, guides for the intended path, and various performance metrics. These are viewed over the Quest's passthrough, 
+									allowing users to have increased awareness both before and during a live weld (when visibility is severely limited).
+								</p>
+							</div>
+
+							<article>
+								<div class="row aln-left aln-middle">
+									<div class="col-4 col-12-mobile">
+										<a href="images/welding/equipment.jpg" target="_blank" class="image fit"><img src="images/welding/equipment.jpg" alt=""></a>
+									</div>
+									<div class="col-4 col-12-mobile">
+										<p>
+											Our headset is mounted inside a standard welding helmet, in front of an auto-darkening screen. The controller is mounted to a welding gun with zip ties (portable!).
+										</p>
+									</div>
+									<div class="col-4 col-12-mobile">
+										<a href="images/welding/live.png" target="_blank" class="image fit"><img src="images/welding/live.png" alt=""></a>
+									</div>
+								</div>
+							</article>
+							<article>
+								<div class="row aln-left aln-middle">
+									<div class="col-4 col-12-mobile">
+										<a href="images/welding/draw.gif" target="_blank" class="image fit"><img src="images/welding/draw.gif" alt=""></a>
+									</div>
+									<div class="col-8 col-12-mobile">
+										<p>
+											The app (built for standalone VR) currently displays a weld's path over a surface, along with information about gun position and speed. 
+											It also collects data from microcontrollers connected via USB-C, for additional information such as breathing rate (measured with a wind sensor).
+											The information can be recorded and played back in 3D space, which is useful for learning.
+										</p>
+									</div>
+								</div>
+							</article>
+							<article>
+								<div class="row aln-left aln-middle">
+									<div class="col-4 col-12-mobile">
+										<a href="images/welding/screen.jpg" target="_blank" class="image fit"><img src="images/welding/screen.jpg" alt=""></a>
+									</div>
+									<div class="col-8 col-12-mobile">
+										<p>
+											Conveniently, the Quest Pro allows wireless casting to other devices, allowing instructors to view a welders POV from a safe position.
+											This POV can also be recorded using Quest features to facilitate reviewing and feedback.
+										</p>
+									</div>
+								</div>
+							</article>
+
+						</div>
+					</section>
+
+					<section id="xr-cybersleuth" class="two">
 						<div class="container">
 							<header>
 								<h2><a href="https://scottking.itch.io/cyber-sleuth">Cyber Sleuth AR</a></h2>
@@ -92,46 +158,6 @@
 								</p>
 							</div>
 
-							<!-- <header>
-								<h3>Personal highlights include:</h3>
-							</header>
-
-							<article>
-								<div class="row aln-left aln-middle">
-									<div class="col-4 col-12-mobile">
-										<a href="images/panarctica/shooting.png" target="_blank" class="image fit"><img src="images/panarctica/shooting.png" alt=""></a>
-									</div>
-									<div class="col-8 col-12-mobile">
-										<p>
-											
-										</p>
-									</div>
-								</div>
-							</article>
-							<article>
-								<div class="row aln-left aln-middle">
-									<div class="col-4 col-12-mobile">
-										<a href="images/panarctica/bt.png" target="_blank" class="image fit"><img src="images/panarctica/bt.png" alt=""></a>
-									</div>
-									<div class="col-8 col-12-mobile">
-										<p>
-											
-										</p>
-									</div>
-								</div>
-							</article>
-							<article>
-								<div class="row aln-left aln-middle">
-									<div class="col-4 col-12-mobile">
-										<a href="images/panarctica/options.png" target="_blank" class="image fit"><img src="images/panarctica/options.png" alt=""></a>
-									</div>
-									<div class="col-8 col-12-mobile">
-										<p>
-											
-										</p>
-									</div>
-								</div>
-							</article> -->
 							<article>
 								<div class="row aln-center aln-middle">
 									<div class="col-4 col-12-mobile">
@@ -161,6 +187,16 @@
 								</div>
 							</article>
 						</div>
+					</section>
+
+				</section>
+
+				<!-- Games -->
+				<section id="games" class="main">
+					<section id="games-header" class="one dark cover" style="background-image: url(images/panarctica/banner.jpg);" title="The Panarctica Team">
+						<header>
+							<h2 class="alt">Games and Demos</h2>
+						</header>
 					</section>
 
 					<section id="games-panarctica" class="three">
