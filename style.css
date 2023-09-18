@@ -75,13 +75,16 @@ a:hover, a:active {
 
 h1 {
     font-size: 30px;
-    color: #fff;
 }
 
 h2 {
     font-size: 24px;
     font-weight: bold;
-    color: #fff;
+}
+
+h3 {
+    font-size: 20px;
+    font-weight: bold;
 }
 
 ul.inline-list {
@@ -97,18 +100,25 @@ svg {
     color: #fff!important;
 }
 
-/* Layout */
-
 .base {
-    width: 800px;
+    width: 880px;
     margin: 0 auto 30px;
 }
 
-@media screen and (max-width: 820px) {
+@media screen and (max-width: 900px) {
     .base {
         width: auto;
         margin: 0 10px 30px;
     }    
+}
+
+.last {
+    margin-bottom: 0;
+}
+
+.subitem {
+    margin: 0 0 20px 0;
+    font-size: 16px;
 }
 
 .profile {
@@ -151,7 +161,7 @@ svg {
     font-size: 16px;
 }
 
-header.border-bottom {
+.border-bottom {
     border-bottom-color: #333!important;
 }
 
@@ -174,4 +184,20 @@ footer.social-icons {
 .front-header a {
     margin-bottom: 20px;
     color: #fff;
+}
+
+.thumbnail {
+    width: auto;
+    height: 120px;
+    margin-bottom: 30px;
+    float: right;
+}
+
+@media screen and (max-width: 767px) {
+    .thumbnail {
+        width: 100%;
+        height: auto;
+        margin-bottom: 30px;
+        float: center;
+    }    
 }
