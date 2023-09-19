@@ -102,13 +102,13 @@ svg {
 
 .base {
     width: 880px;
-    margin: 0 auto 30px;
+    margin: 0 auto 24px;
 }
 
 @media screen and (max-width: 900px) {
     .base {
         width: auto;
-        margin: 0 10px 30px;
+        margin: 0 10px 24px;
     }    
 }
 
