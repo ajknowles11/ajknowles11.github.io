@@ -190,6 +190,14 @@ footer.social-icons {
     color: #fff;
 }
 
+.item .thumbnail {
+    width: auto;
+    height: 140px;
+    margin-top: 10px;
+    margin-bottom: 30px;
+    float: right;
+}
+
 .thumbnail {
     width: auto;
     height: 120px;
