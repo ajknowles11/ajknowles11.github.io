@@ -225,3 +225,7 @@ footer.social-icons {
     height: auto;
     margin-bottom: 30px;
 }
+
+.tiny {
+    font-size: 12px;
+}
