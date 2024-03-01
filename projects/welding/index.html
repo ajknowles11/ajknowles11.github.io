@@ -57,8 +57,7 @@
                 <p>I found a convenient Unity plugin that supported reading serial data on Android devices, which should therefore work for the Quest Pro (which runs on Android). However, I ran into a couple of issues.</p>
                 <p>First, use of the port required requesting permission from the user. This is handled by editing the app's AndroidManifest.xml file, normally to present a prompt when the app is launched. This didn't seem to work well on the Quest- the permission prompt would render behind regular Quest interfaces and was not interactable. I sideloaded a normal Android serial reader app to test the port in general, and it seemed to display the permission request correctly, so either I messed something up or Quest just really doesn't support this type of permission request.</p>
                 <p>Switching to using intent filters in order to prompt the user to launch the app when a USB device is connected seemed to work, though, so I opted to use that. It's worth noting that this solution still doesn't seem to be completely supported on the Quest, evidenced by the fact that having more than one app with such an intent filter specified caused the actual device USB service to crash, which is pretty funny.</p>
-                <!--Put picture of usbservice crash here-->
-                <img class="content-md mx-auto d-block" src="">
+                <img class="content-md mx-auto d-block" src="vr_usb.jpg">
                 <p>The second problem involved the app's device_filter.xml file. In order for a USB device to be supported by an Android app, its product and vendor IDs must be specified in this file. This file was included in the plugin I was using, but it didn't specify the board we were trying to work with, so I had to add its product and vendor IDs myself.</p>
                 <p>Once that was done, we were able to read data from the Seeed board, including whether the gun's trigger was pressed.</p>
             </div>
