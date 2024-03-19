@@ -68,27 +68,69 @@
             </div>
             <div id="implementation" class="item">
                 <h2 class="front-header">Recursive Implementation</h2>
-                <p></p>
+                <p>The algorithm is a recursive function outlined as follows:</p>
+                <p>For each active, visible portal:</p>
+                <ol class="inline-list">
+                    <li>Enable stencil write only, and depth/stecil test.</li>
+                    <li>Set the stencil test to pass where stencil value equals current recursion level, and increment the buffer by 1 on depth and stencil pass.</li>
+                    <li>Draw the portal into the stencil buffer, incrementing it, and set glStencilFunc(GL_EQUAL, recursion_lvl + 1, 0xFF), allowing drawing only within this new portal.</li>
+                    <li>Clear the depth and color buffer within the newly drawn portal. To do this we enable color and depth writing, disable stencil writing, and drawing a fullscreen triangle with glDepthFunc(GL_ALWAYS) and glDepthRange(1,1) and output color equal to our glClearColor. Then we reset glDepthFunc(GL_LESS) and glDepthRange(0,1).</li>
+                    <li>Calculate a new camera transform, representing where the player would be looking from if they were already teleported.</li>
+                    <li>If we are at max recursion level, simply draw all objects into color and depth within the portal view. Otherwise, recurse, passing our new camera transform as the view point.</li>
+                    <li>Disable color writing, enable stencil and depth writing. Set depth to always pass and stencil to pass inside the new portal (glStencilFunc(GL_EQUAL, recursion_lvl + 1, 0xFF)).</li>
+                    <li>Set glStencilOp to decrement on stencil and depth test pass, and draw the portal into stencil and depth buffers. This decrements our stencil buffer back to what it was before we drew the portal the first time, and sets up depth to let our portal occlude and be occluded.</li>
+                    <li>Reset the depth comparison function to GL_LESS.</li>
+                </ol>
+                <p>Then, just once per recursive function:</p>
+                <ol class="inline-list" start="10">
+                    <li>Set stencil test to pass when the buffer is greater than or equal to current recursion level (preventing us from drawing outside whatever portal's view is being drawn this call).</li>
+                    <li>Disable stencil write, and draw all the normal scene objects into depth/color normally.</li>
+                </ol>
+                <p>The actual implementation can be seen in the <a href="https://github.com/ajknowles11/OpenGLPortalDemo/blob/main/Scene.cpp">source code,</a> specifically Scene::Draw() in Scene.cpp.</p>
+                <p>This approach is basically the same as Thomas's, using the stencil buffer value to represent depth levels, or how many portals we see into when drawing. We draw the scene by traversing portal views depth-first, incrementing the stencil buffer on the way up and decrementing once a specific portal view has finished drawing.</p>
+                <p>As mentioned, the main differences lie in handling the depth buffer, as this implementation takes care to never clear the entire thing in order to let portals occlude each other correctly (see step 4).</p>
+                <!-- <h2>Example - Single Portal</h2> -->
+                <img class="content-md mx-auto d-block" src="recursive.jpg">
             </div>
             <div class="item">
                 <h2 class="front-header">Clipping Planes</h2>
-                <p></p>
+                <p>If you do look through the source, you may notice some stuff about clip planes that I didn't mention in the algorithm. One purpose is to avoid drawing objects behind portals as discussed in the single portal section, but there's another important purpose- making teleportation seamless.</p>
+                <p>Making teleportation seamless was extremely important to the project, and one thing Sebastian Lague mentioned was the possibility of seeing behind a portal incorrectly up close, if the player angled their camera such that the near plane intersected with the portal plane.</p>
+                <p>This was easily fixed by using a cuboid for the portal rather than a flat plane and drawing on both front and back faces. However, a flickering issue persisted.</p>
+                <p>Our teleportation worked by checking for the player crossing the middle of the portal bounding box, then teleporting them to the same relative position in the destination portal as they had in the source portal. But a player crossing the middle of a portal can still be within the bounding box, meaning they would be looking at the inside of the destination portal once teleported, which would show the view from the source portal.</p>
+                <div class="d-flex flex-wrap flex-column flex-md-row item">
+                    <div class="col-md-4">
+                        <img class="img-fluid" src="fullbox_0.jpg">
+                    </div>
+                    <div class="col-md-4">
+                        <img class="img-fluid" src="fullbox_1.jpg">
+                    </div>
+                    <div class="col-md-4">
+                        <img class="img-fluid" src="fullbox_2.jpg">
+                    </div>
+                </div>
+                <p>My solution to this was to detect which side of the portal the player was viewing from, and clip the portal such that it only drew the opposite side. This way, if a player crossed the middle of a source portal (looking through the source portal, showing the destination's view), they would not see any part of the destination portal after teleporting, avoiding the problem.</p>
             </div>
         </div>
 
         <div class="base last">
             <div class="item">
                 <h2 class="front-header">Optimizations / Room for Improvement</h2>
-                <p></p>
+                <p>There were many parts of the game which featured multiple sets of recursive portals, and geting good performance could sometimes be tricky without some smart hacks.</p>
+                <p>I think a major improvement that still needs to be made is better frustum culling. Right now we have a fairly simple implementation which ignores portals outside the frustum view, but during recursive calls the frustum retains its size rather than clamping to the edges of the previous portal. This is a bit wasteful.</p>
+                <p>We also don't perform culling on normal objects. I had plans to make a more efficient scene data structure like a BVH for culling purposes but had to abandon it for time reasons. I still may revisit this in the future, as I've been doing something similar with Vulkan for another class.</p>
+                <p>It's also worth looking into more dynamic scene loading. The portal demo doesn't have too many meshes but our game had its entire level being rendered every frame, which I suspect is the main factor behind high frame time when there is high portal recursion.</p>
             </div>
             <div class="item">
                 <h2 class="front-header">Final Notes</h2>
-                <p></p>
+                <p>You can find the teleportation mechanic implementation in PlayMode.cpp in the <a href="https://github.com/ajknowles11/OpenGLPortalDemo/blob/main/PlayMode.cpp">source code.</a> You might notice that the demo uses a walkmesh for movement rather than a physics-based solution. I discuss the reasons for this (mainly convenience-related) in my writeup of the game this system was developed for, which you can read <a href="/projects/genious/">here.</a></p>
+                <p>If I were to use a physics-based system instead, the player teleportation would be handled mostly the same, just without all the walkmesh stuff.</p>
+                <p>Since I was mainly concerned with the rendering side of things, we also didn't develop support for putting other objects through portals, or seeing yourself through a portal. I didn't have time during the semester, but neither were necessary for the game we made.</p>
             </div>
             <div class="item">
                 <img class="content-md mx-auto d-block" src="tour.gif">
-                <p>I'm quite pleased with these portals and I'm glad I got them working in time for our final project. I feel much more comfortable with OpenGL and graphics in general after spending hours debugging in RenderDoc. I'd like to revisit this project when I have more time and improve culling to see how fast I can get everything, and I'd also like to try working with a physics engine of some kind rather than deferring to a walkmesh system.</p>
-                <p>If you'd like to learn about the game this project was part of, click <a href="/projects/genious/">here,</a> or view my source code <a href="https://github.com/ajknowles11/LD54_Gallery">here.</a></p>
+                <p>I'm quite pleased with these portals and I'm glad I got them working in time for our final project. I feel much more comfortable with OpenGL and graphics in general after spending hours debugging in RenderDoc. I'd like to revisit this project when I have more time and improve culling to see how fast I can get everything, and I'd also like to try working with a physics engine of some kind.</p>
+                <p>If you'd like to learn about the game this project was part of, click <a href="/projects/genious/">here,</a> or view my source code <a href="https://github.com/ajknowles11/OpenGLPortalDemo">here.</a></p>
             </div>
         </div>
 

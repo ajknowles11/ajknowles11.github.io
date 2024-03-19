@@ -92,6 +92,13 @@ ul.inline-list {
     line-height: 24px;
 }
 
+ol.inline-list {
+    list-style: decimal;
+    padding-left: 32px;
+    padding-bottom: 20px;
+    line-height: 24px;
+}
+
 li.bulleted {
     list-style-type: disc;
 }
