@@ -63,7 +63,7 @@
             </div>
         </div>
 
-        <div class="base last">
+        <div class="base border-bottom">
             <div class="item">
                 <h2 class="front-header">App Design</h2>
                 <p>For this project, the lab partnered with a local welding workshop for training and demo sessions with feedback. This was helpful as most of the team was inexperienced with welding, so we needed input from others and practice in order to know what was most important to display. As we were designing for an in-situ use case, our main consideration for the app was what information needed to be displayed, and how.</p>
@@ -72,6 +72,7 @@
                 <p>For the angles and standoff distance, I implemented 2D circles and line renderers which changed color as the user lined up with the target, which was pretty satisfying.</p> 
                 <p>For standoff distance, though, I felt that it was difficult to see the dotted line indicator on top of the welding gun, so I opted to include another indicator to the side of the gun that was sort of like an altitude indicator in various games.</p>
                 <p>For speed, we had discussed the possibility of having a point move at the same speed that the user would match, but I felt that it would be difficult to know when to start and stop its movement, so to begin I just used a dashed line that scrolled at the desired speed according to our resources.</p>
+                <img class="content-md mx-auto d-block" src="draw.gif">
                 <h3 class="front-header">Design Flaws</h3>
                 <p>Although we felt happy with the visual quality of the indicators, we found that they were difficult for users to get value from in practice. Some were just difficult to concentrate on when welding. There was a lot of information around the gun, and welding is already a stressful activity. Looking away from the bead to look at my altitude indicator was pretty much impossible, and the scroling line was too hard to see as it moved very slowly.</p>
                 <p>Another problem we discovered was that a technique-based activity like welding can have a lot of variance in what is considered "correct" depending on the person. Speed may be pretty consistent assuming settings are the same, but we found that programming a target "travel" or "work" angle was not the correct way to go about things, as the experienced welders testing our app found themselves constantly "incorrect" despite using their honed abilities.</p>
@@ -79,6 +80,14 @@
                 <h3 class="front-header">Evaluation</h3>
                 <p>Currently, the app is able to record and playback welds in 3D, letting users or instructors view welds from different angles and pause to see values at any point. These recordings are also saved on the device, which is useful for research purposes.</p>
                 <p>We've recently been focusing on post-weld feedback and a scoring system, integrating algorithms used in the drawing tutoring system <a href="https://dl.acm.org/doi/10.1145/3181673">SketchTivity</a>. Having a consistent performance measuring system will allow us to conduct stronger user studies to compare the effects of different types of training, visualizations, and such.</p>
+            </div>
+        </div>
+
+        <div class="base last">
+            <div class="item">
+                <img class="content-md mx-auto d-block" src="live.jpg">
+                <p>This project is still ongoing, with lots of room for improvement on the design side. Still, I'm happy with it so far. It was difficult to figure out a setup that would work in an actual welding environemnt.</p>
+                <p>Feel free to check out some of our publications: Honorable Mention, <a href="https://dl.acm.org/doi/10.1145/3623509.3633398">TEI 2024.</a> Best Demo Paper, <a href="https://dl.acm.org/doi/10.1145/3626485.3626544">ISS 2023.</a></p>
             </div>
         </div>
 
