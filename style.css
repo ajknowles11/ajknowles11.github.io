@@ -103,6 +103,10 @@ li.bulleted {
     list-style-type: disc;
 }
 
+li.spaced {
+    margin-bottom: 4px;
+}
+
 svg {
     color: #fff!important;
 }

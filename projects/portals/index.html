@@ -42,9 +42,9 @@
                 <p>Going into this project I wasn't very comfortable working with the stencil buffer. Actually, I wasn't super comfortable with OpenGL in general. My previous projects in the course got a lot of mileage out of the professor's starter code for the renderer as I wasn't doing much that was interesting graphically, instead focusing on gameplay mechanics. This made portals seem like a pretty difficult choice for a final project, but I knew I would at least learn a good amount.</p>
                 <p>My first thought was to use framebuffers to render a camera view into a texture, something I was familiar with doing in game engines in the past. However, I somehow stumbled upon the idea of using stencil buffers, which was preferable for a couple of reasons:
                     <ul class="inline-list">
-                        <li class="bulleted">Rendering to a texture could cause aliasing when close to a portal without high resolution</li>
-                        <li class="bulleted">Such high resolution textures could be memory heavy, especially with many different sets of portals</li>
-                        <li class="bulleted">I just wanted to learn to use the stencil buffer after briefly interacting with it in Unreal Engine</li>
+                        <li class="bulleted spaced">Rendering to a texture could cause aliasing when close to a portal without high resolution</li>
+                        <li class="bulleted spaced">Such high resolution textures could be memory heavy, especially with many different sets of portals</li>
+                        <li class="bulleted spaced">I just wanted to learn to use the stencil buffer after briefly interacting with it in Unreal Engine</li>
                     </ul>
                 </p>
                 <p>My mind was fully set when I found a <a href="https://th0mas.nl/2013/05/19/rendering-recursive-portals-with-opengl/">nice article by Thomas Rinsma</a> describing his own implementation of recursive stencil buffer-based portals. I decided that I would start with implementing single portal rendering with functionality, and then adapt Thomas's method in my codebase.</p>
@@ -71,20 +71,20 @@
                 <p>The algorithm is a recursive function outlined as follows:</p>
                 <p>For each active, visible portal:</p>
                 <ol class="inline-list">
-                    <li>Enable stencil write only, and depth/stecil test.</li>
-                    <li>Set the stencil test to pass where stencil value equals current recursion level, and increment the buffer by 1 on depth and stencil pass.</li>
-                    <li>Draw the portal into the stencil buffer, incrementing it, and set glStencilFunc(GL_EQUAL, recursion_lvl + 1, 0xFF), allowing drawing only within this new portal.</li>
-                    <li>Clear the depth and color buffer within the newly drawn portal. To do this we enable color and depth writing, disable stencil writing, and drawing a fullscreen triangle with glDepthFunc(GL_ALWAYS) and glDepthRange(1,1) and output color equal to our glClearColor. Then we reset glDepthFunc(GL_LESS) and glDepthRange(0,1).</li>
-                    <li>Calculate a new camera transform, representing where the player would be looking from if they were already teleported.</li>
-                    <li>If we are at max recursion level, simply draw all objects into color and depth within the portal view. Otherwise, recurse, passing our new camera transform as the view point.</li>
-                    <li>Disable color writing, enable stencil and depth writing. Set depth to always pass and stencil to pass inside the new portal (glStencilFunc(GL_EQUAL, recursion_lvl + 1, 0xFF)).</li>
-                    <li>Set glStencilOp to decrement on stencil and depth test pass, and draw the portal into stencil and depth buffers. This decrements our stencil buffer back to what it was before we drew the portal the first time, and sets up depth to let our portal occlude and be occluded.</li>
-                    <li>Reset the depth comparison function to GL_LESS.</li>
+                    <li class="spaced">Enable stencil write only, and depth/stecil test.</li>
+                    <li class="spaced">Set the stencil test to pass where stencil value equals current recursion level, and increment the buffer by 1 on depth and stencil pass.</li>
+                    <li class="spaced">Draw the portal into the stencil buffer, incrementing it, and set glStencilFunc(GL_EQUAL, recursion_lvl + 1, 0xFF), allowing drawing only within this new portal.</li>
+                    <li class="spaced">Clear the depth and color buffer within the newly drawn portal. To do this we enable color and depth writing, disable stencil writing, and drawing a fullscreen triangle with glDepthFunc(GL_ALWAYS) and glDepthRange(1,1) and output color equal to our glClearColor. Then we reset glDepthFunc(GL_LESS) and glDepthRange(0,1).</li>
+                    <li class="spaced">Calculate a new camera transform, representing where the player would be looking from if they were already teleported.</li>
+                    <li class="spaced">If we are at max recursion level, simply draw all objects into color and depth within the portal view. Otherwise, recurse, passing our new camera transform as the view point.</li>
+                    <li class="spaced">Disable color writing, enable stencil and depth writing. Set depth to always pass and stencil to pass inside the new portal (glStencilFunc(GL_EQUAL, recursion_lvl + 1, 0xFF)).</li>
+                    <li class="spaced">Set glStencilOp to decrement on stencil and depth test pass, and draw the portal into stencil and depth buffers. This decrements our stencil buffer back to what it was before we drew the portal the first time, and sets up depth to let our portal occlude and be occluded.</li>
+                    <li class="spaced">Reset the depth comparison function to GL_LESS.</li>
                 </ol>
                 <p>Then, just once per recursive function:</p>
                 <ol class="inline-list" start="10">
-                    <li>Set stencil test to pass when the buffer is greater than or equal to current recursion level (preventing us from drawing outside whatever portal's view is being drawn this call).</li>
-                    <li>Disable stencil write, and draw all the normal scene objects into depth/color normally.</li>
+                    <li class="spaced">Set stencil test to pass when the buffer is greater than or equal to current recursion level (preventing us from drawing outside whatever portal's view is being drawn this call).</li>
+                    <li class="spaced">Disable stencil write, and draw all the normal scene objects into depth/color normally.</li>
                 </ol>
                 <p>The actual implementation can be seen in the <a href="https://github.com/ajknowles11/OpenGLPortalDemo/blob/main/Scene.cpp">source code,</a> specifically Scene::Draw() in Scene.cpp.</p>
                 <p>This approach is basically the same as Thomas's, using the stencil buffer value to represent depth levels, or how many portals we see into when drawing. We draw the scene by traversing portal views depth-first, incrementing the stencil buffer on the way up and decrementing once a specific portal view has finished drawing.</p>
