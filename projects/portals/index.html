@@ -95,7 +95,7 @@
             <div class="item">
                 <h2 class="front-header">Clipping Planes</h2>
                 <p>If you do look through the source, you may notice some stuff about clip planes that I didn't mention in the algorithm. One purpose is to avoid drawing objects behind portals as discussed in the single portal section, but there's another important purpose- making teleportation seamless.</p>
-                <p>Making teleportation seamless was extremely important to the project, and one thing Sebastian Lague mentioned was the possibility of seeing behind a portal incorrectly up close, if the player angled their camera such that the near plane intersected with the portal plane.</p>
+                <p>Seamless teleportation was extremely important to the game we were developing, and one thing Sebastian Lague mentioned was the possibility of seeing behind a portal incorrectly up close, if the player angled their camera such that the near plane intersected with the portal plane.</p>
                 <p>This was easily fixed by using a cuboid for the portal rather than a flat plane and drawing on both front and back faces. However, a flickering issue persisted.</p>
                 <p>Our teleportation worked by checking for the player crossing the middle of the portal bounding box, then teleporting them to the same relative position in the destination portal as they had in the source portal. But a player crossing the middle of a portal can still be within the bounding box, meaning they would be looking at the inside of the destination portal once teleported, which would show the view from the source portal.</p>
                 <div class="d-flex flex-wrap flex-column flex-md-row item">
@@ -116,7 +116,7 @@
         <div class="base last">
             <div class="item">
                 <h2 class="front-header">Optimizations / Room for Improvement</h2>
-                <p>There were many parts of the game which featured multiple sets of recursive portals, and geting good performance could sometimes be tricky without some smart hacks.</p>
+                <p>There were many parts of the game which featured multiple sets of recursive portals, and getting good performance could sometimes be tricky without some situational hacks.</p>
                 <p>I think a major improvement that still needs to be made is better frustum culling. Right now we have a fairly simple implementation which ignores portals outside the frustum view, but during recursive calls the frustum retains its size rather than clamping to the edges of the previous portal. This is a bit wasteful.</p>
                 <p>We also don't perform culling on normal objects. I had plans to make a more efficient scene data structure like a BVH for culling purposes but had to abandon it for time reasons. I still may revisit this in the future, as I've been doing something similar with Vulkan for another class.</p>
                 <p>It's also worth looking into more dynamic scene loading. The portal demo doesn't have too many meshes but our game had its entire level being rendered every frame, which I suspect is the main factor behind high frame time when there is high portal recursion.</p>

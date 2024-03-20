@@ -197,6 +197,10 @@ footer.social-icons {
     font-weight: bold;
 }
 
+h1.front-header {
+    line-height: 34px;
+}
+
 .front-header a {
     margin-bottom: 20px;
     color: #fff;
