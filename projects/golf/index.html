@@ -43,6 +43,7 @@
                 <p>Wanting to be original, I thought about how to give the game a twist. That summer, I had participated in GMTK Jam 23, the theme for which was "Role Reversal." This came to mind when planning, and I thought it might be funny to hit the (black) hole into the ball instead of the other way around. It also opened up the potential for gravity-based plays which was interesting.</p>
                 <p>I started with making a character controller, adjusting to using transform matrices for everything instead of just calling "GetGlobalPosition()" like in a game engine. Once I could move horizontally and look around like normal, I added a club model and made it interpolate between a neutral and aiming stance based on mouse look, and made it swing when clicked.</p>
                 <p>Then, it was time for the fun part.</p>
+                <img class="content-md mx-auto d-block" src="demo1.gif">
             </div>
             <div class="item">
                 <h2 class="front-header">Physics</h2>
@@ -54,14 +55,33 @@
             </div>
             <div class="item">
                 <h2 class="front-header">Level Design</h2>
-                <p></p>
+                <p>Considering the tight deadline and the amount of focus needed on making the physics work, I could only make a handful of levels for this assignment, so I tried to design them in a way that showcased a few different mechanics in order to let the player imagine possible extensions for the future. </p>
+                <p>My physics system and player controller also came with some limitations I had to work around, like only using boxes for level geometry, and keeping things mostly flat as I could only move horizontally. This made it tough to try more interesting designs like sloped surfaces, although I worked out a decent solution for level 4.</p>
+                <p>The first two levels act as a tutorial, letting the player get used to the aiming mechanic gradually. I think I was thinking of the beginning of Super Monkey Ball when I made level 1.</p>
+                <img class="content-md mx-auto d-block" src="level1and2.jpg">
+                <p>Level 3 is where I started to add some more interesting geometry, making these little rocks out of some gray cubes. Thankfully, the physics worked pretty well on these sloped faces, so hitting the ball with some force could make it roll up a bit or even launch over the side of the level (inspiring my addition of the "reset" button).
+                    I think this level looks pretty good for the really simple art style- the gray rocks add some nice variety.</p>
+                <img class="content-md mx-auto d-block" src="level3.jpg">
+                <p>After these levels, I was trying to think of more interesting gravity-related mechanics to work with, as the small gravitational field around the black hole didn't make the game that different from regular mini golf so far.</p>
+                <p>For level 4, I decided to add some weights around that the black hole could eat, granting it a stronger gravitational pull. This also opens up some interesting gameplay options for the player- they could work their way through the level as usual to reach the ball, or let the gravity pull the ball down from its raised position if they collect weight and return to the start.</p>
+                <div class="d-flex flex-wrap flex-column flex-md-row item">
+                    <div class="col-md-6">
+                        <img class="content-md mx-auto d-block" src="level4.jpg">
+                    </div>
+                    <div class="col-md-6">
+                        <img class="content-md mx-auto d-block" src="demo4.gif">
+                    </div>
+                </div>
+                <p>To make the slope, I just hid some cubes inside the ground, being careful to line up the surfaces to prevent bumping into edges.</p>
+                <img class="content-md mx-auto d-block" src="level4slope.jpg">
+                <p>I think this last level especially does a good job showing gameplay potential to the player, which is all I needed for such a small assignment.</p>
             </div>
         </div>
 
         <div class="base last">
             <div class="item">
                 <h2 class="front-header">My Best Work</h2>
-                <p>If it wasn't clear from the physics implementation discussion, this game has a lot of flaws. I could see myself remaking it with better visuals in content in a game engine, or potentially revisiting and rewriting the physics system to be more robust at some point.</p>
+                <p>If it wasn't clear from the physics implementation discussion, this game has a lot of flaws. I could see myself remaking it with better visuals and content in a game engine, or potentially revisiting and rewriting the physics system to be more robust at some point.</p>
                 <p>Still, I think this game was perfect for the assignment. A handful of levels, 3-5 minute experience, easy to understand- so easy, in fact, that I was able to teach my dad to play over the phone when I sent him a copy. That was one of my favorite moments in my game dev career.</p>
                 <p>Also, I was chosen to present it to the class, which was pretty cool.</p>
             </div>
