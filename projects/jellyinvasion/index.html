@@ -37,11 +37,11 @@
                 The experience eventually became Jelly Invasion, a chaotic, noisy, first-person shooter experience designed to contrast with the more static surrounding installations.</p>
             <div class="item">
                 <h2 class="front-header">The Experience</h2>
-                <p>Jelly Invasion was displayed in the <a href="https://miller-ica.cmu.edu/">Miller ICA Gallery</a> along with other senior art projects for 2 weeks and was played by around 300 participants.</p>
+                <p>Jelly Invasion was displayed in the <a href="https://miller-ica.cmu.edu/">Miller ICA Gallery</a> along with other senior art projects for 2 weeks and was enjoyed by around 300 participants in total.</p>
                 <p>After an urgent briefing from a secret agency, the air itself cracks open as jelly aliens pour in and run around the entire exhibition, allowing participants to shoot cartoon guns to remove the threat. 
-                    Aggressive rock music, paint splatters hitting the walls, bunnies on motorcycle and a giant robot all contribute to the mayhem until the experience ends with explosions and portals pulling the aliens back to their world.</p>
+                    Aggressive rock music, paint splatters hitting the walls, bunnies on motorcycles, and a giant robot all contribute to the mayhem until the experience ends with explosions and portals pulling the aliens back to their world.</p>
                 <img class="content-md mx-auto d-block" src="table.jpg">
-                <p>Besides the chaotic nature of the gameplay, the participants themselves also gave the exhibition a dynamic feeling as they moved around, aimed, and ducked around the aliens, providing extra entertainment for other viewers.</p>
+                <p>Besides the chaotic nature of the virtual content, the participants themselves also gave the exhibition a dynamic feeling as they moved, aimed, and ducked around the aliens, providing extra entertainment for other viewers.</p>
                 <div class="d-flex flex-wrap flex-column flex-md-row item">
                     <div class="col-md-6">
                         <img class="content-md mx-auto d-block" src="player0.jpg">
@@ -53,12 +53,13 @@
             </div>
             <div class="item">
                 <h2 class="front-header">Demo Video</h2>
-                
                 <div style="padding:56.25% 0 0 0;position:relative;"><iframe src="https://player.vimeo.com/video/1024983084?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write" style="position:absolute;top:0;left:0;width:100%;height:100%;" title="Jelly Invasion Demo"></iframe></div><script src="https://player.vimeo.com/api/player.js"></script>
             </div>
-            <!-- <div class="item">
+            <div class="item">
                 <h2 class="front-header">Development</h2>
-                <p>a</p>
+                <p>Originally, the project was intended to be built for mobile web AR, allowing participants to easily view the experience on their phones, potentially with other users at the same time. We looked at a few tools for this, such as Niantic's <a href="https://www.8thwall.com/">8th Wall</a> (since we had worked with Niantic software <a href="/projects/cybersleuth/">before</a>) or CMU's <a href="https://arenaxr.org/">ARENA XR</a> (great space tracking, multiplayer, and Unity scene importer).</p>
+                <p>Eventually, though, our goals for the project shifted as we wanted to make the experience a more immersive in order really convey a chaotic feeling towards our players. Combined with some hassle working with web tools, this convinced us to shift to using Unity and targeting Quest headsets with passthrough.</p>
+                <p>Switching to a mixed reality setup also allowed us to apply for the <a href="https://www.cmu.edu/xrtc/">XRTC</a> Creative Research Grant, which gave us funding for our Quest 3s. This was basically required for development and the showcase, and was a nice bonus once the project was completed, so we were extremely thankful to have been chosen to receive the grant.</p>
                 <div class="d-flex flex-wrap flex-column flex-md-row item">
                     <div class="col-md-6">
                         <img class="content-md mx-auto d-block" src="player1.jpg">
@@ -67,8 +68,20 @@
                         <img class="content-md mx-auto d-block" src="player3.jpg">
                     </div>
                 </div>
-                <p>b</p>
-            </div> -->
+                <p>Once we were working in Unity targeting Quest headsets, I was in my comfort zone, so development was pretty smooth. I made some portal shaders using a stencil buffer-based solution, something I had become <a href="/projects/portals/">pretty familiar with</a>, and gave the jelly aliens some basic AI to run around randomly. We manually animated the motion of the bunnies, robot, and credits using the PlayableDirector component and timelines, lining up with music.</p>
+                <p>We also easily set up the guns to launch paintballs, which would destroy small aliens or apply a decal to the larger bunnies on bikes. I noticed a small annoyance, though- collisions with the floor or wall wouldn't result in a decal being displayed since they didn't have a visible mesh (since they were meant to line up with the walls of the real environment). To fix this, I made a quick fake decal prefab that displayed a paint splatter on a quad mesh, and used gameplay tags to decide whether a collision should result in a regular decal or this one instead.</p>
+                <p>The end result was pretty nice, as the player could splatter paint all over the walls of the exhibit as they played, leaving behind a virtual mess even after the aliens are cleaned up and pulled back to their world.</p>
+                <p>As for the colliders for the walls themselves, I ended up just manually building them out since we had access to the hall a few days before the showcase. At some point in development I thought it would be nice to try something like the Quest's Room Setup to scan the environment, making it somewhat flexible, but I couldn't get it to work (the demo app crashed my headset...), so we opted for this basic but working solution.</p>
+            </div>
+        </div>
+
+        <div class="base last">
+            <div class="item">
+                <h2 class="front-header">Conclusion</h2>
+                <p>I'm pretty happy with this project. I've done lots of demos for games in the past but showcasing this one in an art exhibition gave it novelty, while also attracting a different crowd from a game-related event. It was fun to watch.</p>
+                <p>I am a bit disappointed I didn't get to use some of the new technology we were exploring in the early stages, but I did get exposed to some of them at least, and Unity/Quest ended up fitting this project very well.</p>
+                <p>Feel free to watch the demo video included above to see what the experience looked like.</p>
+            </div>
         </div>
 
         <footer class="d-flex flex-wrap justify-content-center social-icons mt-auto">
