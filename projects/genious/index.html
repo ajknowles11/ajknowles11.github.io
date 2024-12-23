@@ -37,47 +37,81 @@
 
         <div class="base border-bottom">
             <p>For our final project in Computer Game Programming, students suggested a large list of themes and mechanics which could serve as inspiration for making a game, and teams were created by grouping students who were interested in the same one. My team, consisting of myself and three others, chose to make a game involving "non-Euclidean geometry," eventually settling on portals as a core mechanic.</p>
-            <p>I've written a <a href="/projects/portals/">separate write-up</a> describing the implementation of portals, so this page will focus on other aspects of the game's design.</p>
+            <p>I've written a <a href="/projects/portals/">separate write-up</a> describing the implementation of portals, so this page will focus on other aspects of the game's development.</p>
+            <img class="content-md mx-auto d-block" src="stairs.jpg">
             <div class="item">
                 <h2 class="front-header">Overview</h2>
-                <p>"Help! I'm Trapped in the Psychedelic Time Dimension Again (Second Time This Week)" is a short first-person puzzle game with portal mechanics. Players are thrust into a high-contrast alternate world and must navigate through different rooms using portals, which can be activated or rotated using various switches and buttons around the levels.</p>
+                <p>"Help! I'm Trapped in the Psychedelic Time Dimension Again (Second Time This Week)" is a short first-person puzzle game with portal mechanics. Players are thrust into a high-contrast alternate world and must navigate through different rooms using portals, which can be activated or rotated using various switches and buttons around the levels, in order to obtain milk.</p>
                 <p>The game takes around 5 minutes to complete. The puzzles are mostly straightforward, intending to showcase a bunch of different possible interactions with portals. While the later rooms can be quite complicated, the game doesn't have any "fail" states, so walking around and interacting with things until you win is an effective strategy.</p>
-                <p>At CMU's 2023 Game Creation Society Release Festival, our game won a few awards within our class, including best writing, graphics, gameplay, and overall quality.</p>
+                <img class="content-md mx-auto d-block" src="back.jpg">
+                <p>At CMU's Fall 2023 Game Creation Society Release Festival, our game won a few awards within our class, including best writing, graphics, gameplay, and overall quality.</p>
                 <p>The obnoxiously long title of the game was chosen as a joke, intended to set up the unseriousness of our game's narrative. The name of our development team, "Genious," was chosen because our professor was wearing a <a href="https://dashare.zone/listing/im-right-the-opinion-genious?product=369">da share z0ne shirt</a> on our last day to decide, and we had no other ideas.</p>
             </div>
             <div class="item">
                 <h2 class="front-header">Demo Video</h2>
                 <div style="padding:56.25% 0 0 0;position:relative;"><iframe src="https://player.vimeo.com/video/1035819789?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write" style="position:absolute;top:0;left:0;width:100%;height:100%;" title="Help! I'm Trapped in the Psychedelic Time Dimension Again (Second Time This Week) Demo"></iframe></div><script src="https://player.vimeo.com/api/player.js"></script>
             </div>
-            <!-- <div class="item">
+            <div class="item">
                 <h2 class="front-header">Development</h2>
-                <p>When we initially started designing this project, we were inspired by visualizations of hyperbolic and spherical spaces, such as <a href="https://store.steampowered.com/app/1256230/Hyperbolica/">Hyperbolica</a>. However, we decided against ... too engine-heavy, non engine people would be useless for beginning of project (can't help, can't plan since mechanics determined by what we can figure out)... too much research let's just make a game.
-                <p>Talk about evolution of scope, going from hyberbolic to just portals, and then abandoning the subtle portal sections in favor of more test chambers</p>
-                <p>We already knew it would be kinda walksim-y, but didn't want just a tech demo.</p>
-                <p>Quick mention of themes/meaning, was gonna be more hopeless but in the end milk is silly enough but still a good enough goal.</p>
+                <p>When we initially started designing this project, we were inspired by visualizations of hyperbolic and spherical spaces, such as <a href="https://store.steampowered.com/app/1256230/Hyperbolica/">Hyperbolica</a>. However, we decided such an endeavor wouldn't be preferred for this assignment:
+                    <ul class="inline-list">
+                        <li class="bulleted spaced">From the start, the team knew we wanted to make an actual game with non-Euclidean geometry (at least a bit more than a walking sim), rather than just a graphical demo. Even with some existing resources, we felt that hyperbolic space would take too much time to figure out how to render properly to leave time for developing gameplay.</li>
+                    </ul>
+                </p>
+                <p>
+                    <ul class="inline-list">
+                        <li class="bulleted spaced">Additionally, on top of designing levels in hyperbolic space already being a confusing process, the actual mesh/scene formats we would need wouldn't be known until rendering was figured out, meaning teammates who weren't focused on rendering wouldn't be able to contribute anything for much of the project.</li>
+                    </ul>
+                </p>
+                <p>With these reasons in mind, we pivoted to focus only on portals, which were much more approachable from a math and rendering perspective (although still involved when overlaps/recursion are at play) and were easier to design and build levels for.</p>
+                <p>When considering portal-related gameplay, our team identified two approaches: one is the test chamber-style used in Portal, where puzzles are clearly identified as such and the portal presence is obvious. The other was a more subtle use of portals, creating spaces that appeared normal but were actually non-Euclidean.</p>
+                <p>While we had tested the latter approach a bit in prototypes, we unfortunately didn't have time to finish designing a section to fit into our final game, so we ended up just having a bunch of test chambers.</p>
+                <p>As far as narrative goes, we had written some ideas about nihilism down but ended up simplifying quite a bit, making a silly, mundane goal of finding milk the main motivation for completing the game. I think the silliness adds to the game a lot, and just having a small objective makes it more interesting to walk forward through the levels.</p>
             </div>
             <div class="item">
                 <h2 class="front-header">Featured Mechanics</h2>
-                <p>Walkmesh allows ceiling and wall portals, levers to activate/deactivate, portals are two sided! that's cool. also nothing stopping us from moving portals around so let's rotate. Last level is a mess but has everything.</p>
+                <p>Since we knew gameplay would consist of walking and clicking on things, we could avoid building a physics-based character controller by using a walkmesh system, which we had already used in an earlier project. We had to recalculate walkmesh-local coordinates after teleporting, but otherwise our portals worked fine.</p>
+                <p>The walkmesh also allowed players to walk on surfaces at different angles, so we threw in some ceiling and wall portals.</p>
+                <img class="content-md mx-auto d-block" src="ceiling.jpg">
+                <p>As far as interactions go, we had levers which could toggle a portal's activation, so we made rooms which required turning a portal on, and then a room which required turning a portal off to continue.</p>
+                <img class="content-md mx-auto d-block" src="off.jpg">
+                <p>We also took advantage of our portals being two-sided, making players enter through one side and go around through the other.</p>
+                <img class="content-md mx-auto d-block" src="sides.jpg">
+                <p>When thinking about portal usage I hadn't seen before in games like Portal, I realized we could rotate and move around our portals without issue, so I included some buttons which could do that.</p>
+                <img class="content-md mx-auto d-block" src="spin.gif">
+                <p>The last room is an ugly mess to demonstrate possible complexity of levels. It includes every mechanic, just for fun.</p>
+                <img class="content-md mx-auto d-block" src="last.jpg">
             </div>
             <div class="item">
                 <h2 class="front-header">Actually Making the Game</h2>
-                <p>Talk about blender tools and scripting here, and deciding the final levels</p>
-                <p>Mention shortcuts (text is just pre-rendered image)</p>
-                <p>Despite enforced early deadlines, still feels like our whole game was made in last week (prototypes didn't really relate to final game too much, level designs discarded). Partially due to slow portal development, but I think we just needed to plan on paper better.</p>
+                <p>From earlier games in the class, we already had a comfortable pipeline for importing models from Blender into our engine, so we continued to use it to make levels for this game.</p>
+                <img class="content-md mx-auto d-block" src="blender.jpg">
+                <p>In those smaller games, most of the imported meshes remained static, and animation/functionality was handled by manually adding lines to find meshes by name on load so they could be transformed. For this game, though, we not only would be dealing with larger maps, we'd also have lots of functioning objects with extra data that would need to be hooked up- the portals themselves, for example, would be a real pain to manually connect in our scripts.</p>
+                <p>To address this issue, I made a small blender plugin that allowed us to mark specific meshes as different types of objects- portals, buttons, etc- and modified our export plugin and engine scene importer to add them as special objects with extra data included.</p>
+                <img class="content-md mx-auto d-block" src="plugin.jpg">
+                <p>The plugin was about as basic as a level design tool could get, with just bools and string fields we could fill out as we modeled levels. Still, it was really helpful when it came to designing and testing since we could avoid extra scripting/compiling for iterations, and it was less confusing to work with than trying to manually attach portals in-engine.</p>
+                <p>When it came to designing the puzzles in the final game, we approached it by trying to showcase as many working mechanics as possible (the ones discussed above). I employed this level design technique for my <a href="/projects/golf/">first 3D game in the class</a>, and I think it works well for small projects with a tech focus, though when it comes to making a solid gaming experience, I think other considerations are more important (how levels fit into the narrative, for example).</p>
+                <img class="content-md mx-auto d-block" src="button.jpg">
+                <p>In line with our barebones level design approach, we took lots of shortcuts that wouldn't be ideal in a larger scale project. Text and UI elements were prerendered images- we had handled text rendering in a previous assignment, but integrating it into our final project was too low of a priority for how little text was needed.</p>
+                <img class="content-md mx-auto d-block" src="text.jpg">
+                <p>We also had little audio besides clicking of switches and buttons. A short music loop plays in the first room of the game, and some wind ambience plays throughout our levels, but a real soundtrack wasn't able to be put together in time.</p>
+                <p>There was more tech included in the engine that isn't discussed here, like a timer system used for animating meshes or an ugly last-minute optimization to manually disable portals as we progress through rooms. If you'd like to look through the <a href="https://github.com/Vpollo/Genious">source code</a>, you can find most of that stuff in <a href="https://github.com/Vpollo/Genious/blob/main/PlayMode.cpp">PlayMode.cpp.</a></p>
+                <p>Despite enforced early deadlines, almost all of our game's content was made in the last week or so as we mostly discarded our prototype level designs, which is not ideal. The slow development of the portal renderer didn't help, but I still think we should have done a better job at planning levels on paper once we knew we were working with portals, even if we needed to wait for modeling/scripting to happen when the engine was ready.</p>
             </div>
         </div>
 
         <div class="base last">
             <div class="item">
                 <h2 class="front-header">Final Thoughts</h2>
-                <p>Even with modified scope, would have liked a nature section with subtle portal stuff, more milk jugs laid around to make theme more present throughout gameplay, and a way to fail. Also better soundtrack.</p>
+                <p>As mentioned, our scope for this game changed quite a bit throughout development. I think we ended up meeting our minimum goals of having a portal-based game with somewhat varied puzzles and a silly but decent enough narrative (not just a graphics demo!), though I wish we were able to make the game a bit more well-rounded in some areas.</p>
+                <p>In particular, the "subtle portal" sections would have been nice, and I think playing into the milk story more (leaving empty jugs and puddles around) would make a stronger impression while making environments more visually interesting. Also, more challeging levels (fail states) and an actual soundtrack would be nice.</p>
+                <img class="content-md mx-auto d-block" src="milk.jpg">
             </div>
             <div class="item">
-                <p>still met our goals and made a working portal game that won stuff</p>
+                <p>Still, I'm really proud that our team was able to put together a working portal game that players seemed to find fun, and winning some class awards was nice too.</p>
                 <p>Feel free to check out the game <a href="https://vvvpollo.itch.io/help">here,</a> or view the source code <a href="https://github.com/Vpollo/Genious">here.</a></p>
             </div>
-        </div> -->
+        </div>
 
         <footer class="d-flex flex-wrap justify-content-center social-icons mt-auto">
             <a class="text-muted" href="mailto:ajknowles21@gmail.com">
