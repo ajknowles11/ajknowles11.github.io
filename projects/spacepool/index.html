@@ -34,45 +34,53 @@
             <p><a href="https://github.com/jsking2920/GMTK-Game-Jam-2024">GitHub</a> | <a href="https://scottking.itch.io/gmtk-game-jam-2024">Itch Page (Playable)</a></p>
         </div>
 
-        <!-- <div class="base border-bottom">
-            <p>I've participated in a few game jams before with varying success, but I happened to be particularly inspired to make a small Unity game when I learned that my professor for Computer Game Programming was offering extra credit for participation in Ludum Dare 54.
-             Since that offer only included solo, "Compo" submissions, I had to get creative by myself.</p>
+        <div class="base border-bottom">
+            <p>The theme for GMTK Jam 2024 was "Built to Scale." My friends and I threw around a few ideas and were torn between a balance-oriented card battler (balancing a scale), and space-themed pool table puzzles (really large scale objects). While I think the first idea would be more original and fitting for the theme, we ended up choosing the latter as it was a better fit for our team's strengths.</p>
+            <p>Though not the most original idea, the game was incredibly solid for such a short timeframe. Of over 7500 entries, the game was ranked at #2013 in creativity, while it hit #432, #490, and #649 in style, enjoyment, and overall respectively. Comments praised the polish of sound effects and animations.</p>
+            <img class="content-md mx-auto d-block" src="eat.gif">
             <div class="item">
-                <h2 class="front-header">Design</h2>
-                <p>The theme for the event was "Limited Space." I brainstormed a few ideas about what that could mean, such as room size, inventory space, and a joke about limited use of the space bar.</p>
-                <p>In the end I opted for a phone with limited storage capacity, with taking and deleting photos as the main interactions. This would give me clear fun mechanics to design and implement (my favorite way to start any project), and some opportunities for level design in 3D.</p>
-                <img class="content-md mx-auto d-block" src="camview.jpg">
-                <p>So I knew I wanted to have a camera that could take and delete photos. As far as the actual gameplay, my first idea was to have certain objects get deleted in the "real" world when their photos are deleted. This would be unexpected and maybe unsettling at times, with the goal of the game to keep as many photos as possible (only deleting when truly necessary).</p>
-                <p>However, when I started thinking about how to introduce and teach gameplay, I realized line-of-sight made more sense as a main mechanic, partially because I didn't like the idea of people "losing points" or failing, and keeping objects normal while forcing the player to find angles let people explore a bit more without being punished for taking the wrong photo.</p>
-                <p>It also just evolved naturally as I considered how to introduce the whole gallery storage limit thing, and iterate on gameplay- I would start with 2 photo slots and 2 objects, and taking their photos would open a new room. This room was basically the same but with 2 new objects, so players would need to use the delete action to get space for new photos. Once they know how to do that, it seems natural to try 3 objects with only 2 photos, letting them try lining up the right shot until they can proceed.</p>
-                <img class="content-md mx-auto d-block" src="lineup.jpg">
-                <p>I managed to fit the object deletion in at the end, too. I'm a bit unsatisfied; to me it feels like I shoehorned it in there as a random variation as opposed to the central mechanic it was originally supposed to be. I wanted the deletable objects to look cool and have really interesting puzzles, but due to time they're just solid red and their puzzles are pretty simple. Still, most of the people I showed it to in real life seemed to appreciate the mechanic, imagining how it could be utilized more with more levels.</p>
-                <img class="content-md mx-auto d-block" src="deletion.gif">
+                <h2 class="front-header">Gameplay</h2>
+                <p>Our game uses pool-table mechanics in 11 custom levels intended to be cleared in as few shots as possible.</p>
+                <p>Players can click on the blue planet (the cue ball) and drag the mouse to aim, releasing to launch in the direction of other planets with the goal of knocking them into black holes.</p>
+                <img class="content-md mx-auto d-block" src="aim.jpg">
+                <p>The number and placement of planets and black holes varies from level to level, while other mechanics are slowly introduced in the form of other celestial bodies.</p>
+                <p>In early levels, planets of different sizes and masses are introduced, requiring additional force to be moved.</p>
+                <img class="content-md mx-auto d-block" src="size.jpg">
+                <p>Neutron stars act as a holding point for planets, catching them with strong localized gravity and keeping them still.</p>
+                <img class="content-md mx-auto d-block" src="neutron.gif">
+                <p>Regular stars keep obstacles in orbit, which can interfere with shots.</p>
+                <img class="content-md mx-auto d-block" src="orbit.gif">
+                <p>Wormholes act as portals between points in the level for planets or the cue ball, maintaining velocity and allowing for some skill shots.</p>
+                <img class="content-md mx-auto d-block" src="wormhole.gif">
+                <p>Each level has a set goal for number of shots to earn 1, 2, or 3 stars. Levels can be replayed easily using the level select menu, which allows for grinding for 3 stars, an extremely difficult but addicting process as most 3-star solutions require highly specific lineups.</p>
+                <img class="content-md mx-auto d-block" src="stars.jpg">
+                <img class="content-md mx-auto d-block" src="levels.jpg">
             </div>
             <div class="item">
                 <h2 class="front-header">Implementation</h2>
-                <p>Implementation was generally pretty straightforward. The phone mesh has no screen, and a world space canvas in its place lets me show a camera view while keeping field-of-view the same. A second camera is used to take the screenshot, which is just attached to the main camera and ignores the phone mesh and screen. It simply reads pixels from the screen and crops the image to a square that's pretty much in line with the indicator on the phone screen. This is used for the gallery view and the most recent thumbnail in camera mode.</p>
-                <p>Each "picture" in the gallery actually consists of an image, and a list of deletable objects within that image. A separate game object, "CollectionManager," keeps track of each object which can be photographed, and which photos contain them. These both are updated each time a photo is taken or deleted- the deletable objects of a photo are deleted when the photo is, and the CollectionManager is checked when we try to proceed from one room to the next.</p>
-                <p>The hardest part was determining which objects are in a photo when we take one. I experimented with a couple ways- my goal at first was to check bounding boxes to make sure an object was sufficiently within the bounds of the frame. While I have the frustum for the actual player camera, the photos are cropped, meaning I had to use the screen-space square frame dimensions to somehow get a new frustum. </p>
-                <p>This went nowhere, so after a couple hours I gave up and just checked if object origins were in view using Camera.WorldToScreenPoint(), which is then easily compared to the screen-space* frame outline.</p>
-                <p class="tiny">*Well, an estimate of the frame outline's screen-space coordinates, since the phone screen is in world space. I played around until it was good enough.</p>
+                <p>Besides scripting face animations (made by my friend Andy) to make planets react to being knocked around, I worked on the game's physics-based mechanics, giving some objects local gravity fields to attract others.</p>
+                <p>Gravity between bodies is calculated using the law of universal gravitation (F = G*m_1m_2/r^2), although the value of the constant was chosen arbitrarily to make the game feel good.</p>
+                <p>Each orbital body can be marked as attracting, or being attracted to, certain other kinds of bodies filtered by physics layers. Attractors have a manually-placed gravity field (a CircleCollider2D), which allows them to only apply gravity to objects within a reasonable range.</p>
+                <img class="content-md mx-auto d-block" src="field.jpg">
+                <p>Gravity and orbits were pretty fun to work on. With the right masses and initial velocites, I could even get lunar orbits to work around planets, but I found that slight adjustments could lead to unstable behavior (especially when such an orbit is disrupted by the cue ball).</p>
+                <img class="content-md mx-auto d-block" src="doubleorbit.gif">
+                <p>We found that in general, realistic orbits were hard to fit into gameplay since the player's actions require so much unrealistic behavior (friction in space, for example). Completely toggling friction when needed was an option, as was manually correcting ball velocity when entering orbits, but we decided against that kind of scripted movement for now as we were already more interested in making levels with our other mechanics.</p>
             </div>
         </div>
 
         <div class="base last">
             <div class="item">
                 <h2 class="front-header">Room for Improvement</h2>
-                <p>Unsurprisingly, the short timeframe meant I had to cut some corners. A major flaw with this project was the lack of audio. I think some ambience and photo sfx would have improved the "mood" score quite a bit, but I just didn't have time and had to focus on other aspects I judged to be more important.</p>
-                <p>The visuals could also use some improvements. Art isn't my specialty so I'm generally fine with the art direction in the game (simple and low-fidelity), which also fits well with the graphical limits of WebGL. However, the photographable object models and doors caused some confusion for players, since they were created in the final minutes before submission.</p>
-                <p>In particular, the fact that I reused the same 3 art installations throughout the levels caused some players to backtrack thinking they could use objects in early levels to open doors in later levels (since the doors themselves only listed the type of object necessary, not specifying it had to be from the current room).</p>
-                <img class="content-md mx-auto d-block" src="door.jpg">
-                <p>Of course, just using completely unique models would solve that issue, which is a time problem. I'd also like to improve the doors, both visually (the drawings were done in 5 minutes) and interaction-wise. Right now the player simply walks up to the door and it opens if its requirements are met. I think a more dynamic response as photos are taken would be more satisfying as players could immediately tell if they are making progress.</p>
+                <p>Most players seemed really happy with the game, though one complaint I heard that I agree with involves the purple "dark matter" objects which act as immovable barriers. Our team decided to use this material for such objects since it was already being used for the outer walls of the levels, which similarly act as fixed objects (and look quite nice).</p>
+                <p>For objects within the interior of levels, though, I think the material blends a bit too much with the background, while the soft and flowy edges slightly obscure the hitboxes and can create confusion.</p>
+                <img class="content-md mx-auto d-block" src="darkmatter.jpg">
+                <p>I also would have liked more gameplay with orbits, especially involving knocking balls themselves into and out of orbits. As discovered, this would certainly require some manual velocity correction to be at all playable, but I think it would have really made our game stick out even more.</p>
             </div>
             <div class="item">
-                <p>Overall, though, I'm pretty happy with how this game turned out, both personally and with my score (72nd overall and 16th for innovation is pretty good out of 489 Compo submissions, and that's with low scores for "graphics," "mood," and "humor," the last of which I definitely should have opted out).</p>
-                <p>Feel free to check out the game <a href="https://lettas.itch.io/gallery-ld54">here,</a> or view my source code <a href="https://github.com/ajknowles11/LD54_Gallery">here.</a></p>
+                <p>Still, for such a short project, this game turned out incredibly well. I think our team's diverse skillsets and past experience working together allowed us to make a really polished product unlike previous student work.</p>
+                <p>Feel free to check out the game <a href="https://scottking.itch.io/gmtk-game-jam-2024">here,</a> or view our source code <a href="https://github.com/jsking2920/GMTK-Game-Jam-2024">here.</a></p>
             </div>
-        </div> -->
+        </div>
 
         <footer class="d-flex flex-wrap justify-content-center social-icons mt-auto">
             <a class="text-muted" href="mailto:ajknowles21@gmail.com">
